@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import gql from "graphql-tag";
 import { createServer, Server } from "http";
 import { config } from "dotenv";
+import { welcome } from "./api/welcome";
 
 config();
 const port = process.env.PORT || 4000;
@@ -35,6 +36,8 @@ const apolloServer = new ApolloServer<MyContext>({
   },
   plugins: [ApolloServerPluginLandingPageLocalDefault()],
 });
+
+app.get("/", welcome);
 
 async function start() {
   /* load apollo server */
